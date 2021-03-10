@@ -81,8 +81,17 @@ class get_weight_score():
         try:
             file = xlwt.Workbook(encoding='utf-8', style_compression=0)
             sheet = file.add_sheet('sheet1', cell_overwrite_ok=True)
+            
+            if self.mode == "1":
+                self.value = sorted(self.value, key=lambda x: x[9], reverse=True)
+            elif self.mode == "2":
+                self.value = sorted(self.value, key=lambda x: x[12], reverse=True)
+            self.value.insert(0, self.headline)
+
             for i in range(len(self.value)):
                 self.count += 1
+                if self.count > 0:
+                    self.value[i][0] = self.count
                 for j in range(len(self.value[i])):
                     sheet.write(i, j, self.value[i][j])
 
@@ -186,8 +195,6 @@ class get_weight_score():
         if self.get_dir_file() or self.self_init():  # 用户输入错误,退出程序
             self.self_exit()
             return
-
-        self.value.append(self.headline)
 
         if self.file_list:
             for file in self.file_list:

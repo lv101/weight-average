@@ -21,26 +21,26 @@ class get_weight_score():
         self.headline = ""
 
     def self_round(self, value: str, decimal: "int >= 0" = 0):
-		'''
-		实现对浮点数四舍五入的功能
-		:param value: 输入的浮点数
-		:param decimal: 精确位数
-		:return: 四舍五入后的数
-		'''
-		if len(str(value).split('.')[1]) > decimal + 1:
-			method = int
-		else:
-			method = round
+	'''
+	实现对浮点数四舍五入的功能
+	:param value: 输入的浮点数
+	:param decimal: 精确位数
+	:return: 四舍五入后的数
+	'''
+	if len(str(value).split('.')[1]) > decimal + 1:
+		method = int
+	else:
+		method = round
 
-		add = 0
-		multi = pow(10, decimal)
-		value = str(method(float(value) * multi * 10))
+	add = 0
+	multi = pow(10, decimal)
+	value = str(method(float(value) * multi * 10))
 
-		if value[-1] >= '5':  # 判断末位四舍五入
-			add = 1
-		value = int(value[:-1]) + add
+	if value[-1] >= '5':  # 判断末位四舍五入
+		add = 1
+	value = int(value[:-1]) + add
 
-		return value / multi
+	return value / multi
 
 
     def self_init(self):

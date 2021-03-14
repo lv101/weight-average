@@ -20,9 +20,28 @@ class get_weight_score():
         self.path = f"{os.getcwd()}\\{self.dir_name}\\"
         self.headline = ""
 
-    def self_round(self, value, decimal=0):
-        multi = pow(10, decimal)
-        return round(value * multi) / multi
+    def self_round(self, value: str, decimal: "int >= 0" = 0):
+		'''
+		实现对浮点数四舍五入的功能
+		:param value: 输入的浮点数
+		:param decimal: 精确位数
+		:return: 四舍五入后的数
+		'''
+		if len(str(value).split('.')[1]) > decimal + 1:
+			method = int
+		else:
+			method = round
+
+		add = 0
+		multi = pow(10, decimal)
+		value = str(method(float(value) * multi * 10))
+
+		if value[-1] >= '5':  # 判断末位四舍五入
+			add = 1
+		value = int(value[:-1]) + add
+
+		return value / multi
+
 
     def self_init(self):
         self.mode = input("\n  请选择你所在学校加权平均分计算方式[1-2]\n"
